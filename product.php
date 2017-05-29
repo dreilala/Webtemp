@@ -55,7 +55,27 @@ echo "<div class='col-md-12'>";
         echo "</div>";
     }
 echo "</div>";
+ // set product id
+$product_image->product_id=$id;
  
+// read all related product image
+$stmt_product_image = $product_image->readByProductId();
+ 
+// count all relatd product image
+$num_product_image = $stmt_product_image->rowCount();
+ 
+echo "<div class='col-md-1'>";
+    // if count is more than zero
+    if($num_product_image>0){
+        // loop through all product images
+        while ($row = $stmt_product_image->fetch(PDO::FETCH_ASSOC)){
+            // image name and source url
+            $product_image_name = $row['name'];
+            $source="uploads/images/{$product_image_name}";
+            echo "<img src='{$source}' class='product-img-thumb' data-img-id='{$row['id']}' />";
+        }
+    }else{ echo "No images."; }
+echo "</div>";
 // content will be here
  
 // include page footer HTML
