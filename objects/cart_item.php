@@ -170,3 +170,31 @@ public function read(){
     // return values
     return $stmt;
 }
+// create cart item record
+function update(){
+ 
+    // query to insert cart item record
+    $query = "UPDATE " . $this->table_name . "
+            SET quantity=:quantity
+            WHERE product_id=:product_id AND user_id=:user_id";
+ 
+    // prepare query statement
+    $stmt = $this->conn->prepare($query);
+ 
+    // sanitize
+    $this->quantity=htmlspecialchars(strip_tags($this->quantity));
+    $this->product_id=htmlspecialchars(strip_tags($this->product_id));
+    $this->user_id=htmlspecialchars(strip_tags($this->user_id));
+ 
+    // bind values
+    $stmt->bindParam(":quantity", $this->quantity);
+    $stmt->bindParam(":product_id", $this->product_id);
+    $stmt->bindParam(":user_id", $this->user_id);
+ 
+    // execute query
+    if($stmt->execute()){
+        return true;
+    }
+ 
+    return false;
+}
