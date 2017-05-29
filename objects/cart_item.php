@@ -19,3 +19,11 @@ class CartItem{
         $this->conn = $db;
     }
 }
+// get database connection
+$database = new Database();
+$db = $database->getConnection();
+ 
+// initialize objects
+$product = new Product($db);
+$product_image = new ProductImage($db);
+$cart_item = new CartItem($db);
