@@ -98,6 +98,24 @@ echo "<div class='col-md-4' id='product-img'>";
         }
     }else{ echo "No images."; }
 echo "</div>";
+echo "<div class='col-md-5'>";
+ 
+    echo "<div class='product-detail'>Price:</div>";
+    echo "<h4 class='m-b-10px price-description'>&#36;" . number_format($product->price, 2, '.', ',') . "</h4>";
+ 
+    echo "<div class='product-detail'>Product description:</div>";
+    echo "<div class='m-b-10px'>";
+        // make html
+        $page_description = htmlspecialchars_decode(htmlspecialchars_decode($product->description));
+ 
+        // show to user
+        echo $page_description;
+    echo "</div>";
+ 
+    echo "<div class='product-detail'>Product category:</div>";
+    echo "<div class='m-b-10px'>{$product->category_name}</div>";
+ 
+echo "</div>";
 // content will be here
  
 // include page footer HTML
