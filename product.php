@@ -12,6 +12,19 @@ $db = $database->getConnection();
 // initialize objects
 $product = new Product($db);
 $product_image = new ProductImage($db);
+// get ID of the product to be edited and action
+$id = isset($_GET['id']) ? $_GET['id'] : die('ERROR: missing ID.');
+$action = isset($_GET['action']) ? $_GET['action'] : "";
+ 
+// set the id as product id property
+$product->id = $id;
+ 
+// to read single record product
+$product->readOne();
+ 
+// set page title
+$page_title = $product->name;
+
 $cart_item = new CartItem($db);
  
 // get ID of the product to be edited
