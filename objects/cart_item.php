@@ -198,3 +198,24 @@ function update(){
  
     return false;
 }
+// remove cart item by user and product
+public function delete(){
+ 
+    // delete query
+    $query = "DELETE FROM " . $this->table_name . " WHERE product_id=:product_id AND user_id=:user_id";
+    $stmt = $this->conn->prepare($query);
+ 
+    // sanitize
+    $this->product_id=htmlspecialchars(strip_tags($this->product_id));
+    $this->user_id=htmlspecialchars(strip_tags($this->user_id));
+ 
+    // bind ids
+    $stmt->bindParam(":product_id", $this->product_id);
+    $stmt->bindParam(":user_id", $this->user_id);
+ 
+    if($stmt->execute()){
+        return true;
+    }
+ 
+    return false;
+}
