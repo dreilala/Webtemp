@@ -110,3 +110,39 @@ public function count(){
     // return
     return $rows[0];
 }
+// create cart item record
+function create(){
+ 
+    // to get times-tamp for 'created' field
+    $this->created=date('Y-m-d H:i:s');
+ 
+    // query to insert cart item record
+    $query = "INSERT INTO
+                " . $this->table_name . "
+            SET
+                product_id = :product_id,
+                quantity = :quantity,
+                user_id = :user_id,
+                created = :created";
+ 
+    // prepare query statement
+    $stmt = $this->conn->prepare($query);
+ 
+    // sanitize
+    $this->product_id=htmlspecialchars(strip_tags($this->product_id));
+    $this->quantity=htmlspecialchars(strip_tags($this->quantity));
+    $this->user_id=htmlspecialchars(strip_tags($this->user_id));
+ 
+    // bind values
+    $stmt->bindParam(":product_id", $this->product_id);
+    $stmt->bindParam(":quantity", $this->quantity);
+    $stmt->bindParam(":user_id", $this->user_id);
+    $stmt->bindParam(":created", $this->created);
+ 
+    // execute query
+    if($stmt->execute()){
+        return true;
+    }
+ 
+    return false;
+}
