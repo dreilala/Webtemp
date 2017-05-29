@@ -42,6 +42,19 @@ $page_title = $product->name;
  
 // include page header HTML
 include_once 'layout_head.php';
+echo "<div class='col-md-12'>";
+    if($action=='added'){
+        echo "<div class='alert alert-info'>";
+            echo "Product was added to your cart!";
+        echo "</div>";
+    }
+ 
+    else if($action=='unable_to_add'){
+        echo "<div class='alert alert-info'>";
+            echo "Unable to add product to cart. Please contact Admin.";
+        echo "</div>";
+    }
+echo "</div>";
  
 // content will be here
  
