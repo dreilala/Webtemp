@@ -24,9 +24,7 @@ class Product{
   function read($from_record_num, $records_per_page){
 
     // select all products query
-    $query = "SELECT
-    id, name, description, price
-    FROM
+    $query = "SELECT id, name, description, price FROM
     " . $this->table_name . "
     ORDER BY
     created DESC
