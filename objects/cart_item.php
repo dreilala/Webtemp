@@ -146,3 +146,27 @@ function create(){
  
     return false;
 }
+// read items in the cart
+public function read(){
+ 
+    $query="SELECT p.id, p.name, p.price, ci.quantity, ci.quantity * p.price AS subtotal
+            FROM " . $this->table_name . " ci
+                LEFT JOIN products p
+                    ON ci.product_id = p.id
+            WHERE ci.user_id=:user_id";
+ 
+    // prepare query statement
+    $stmt = $this->conn->prepare($query);
+ 
+    // sanitize
+    $this->user_id=htmlspecialchars(strip_tags($this->user_id));
+ 
+    // bind value
+    $stmt->bindParam(":user_id", $this->user_id, PDO::PARAM_INT);
+ 
+    // execute query
+    $stmt->execute();
+ 
+    // return values
+    return $stmt;
+}
