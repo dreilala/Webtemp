@@ -1,4 +1,7 @@
 <?php
+
+include_once "objects/product.php";
+include_once "objects/product_image.php";
 // 'cart item' object
 class CartItem{
 
