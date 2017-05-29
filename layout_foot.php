@@ -12,6 +12,12 @@
 <script src="libs/css/bootstrap/docs-assets/js/holder.js"></script>
  <script>
 $(document).ready(function(){
+        // change product image on hover
+$(document).on('mouseenter', '.product-img-thumb', function(){
+    var data_img_id = $(this).attr('data-img-id');
+    $('.product-img').hide();
+    $('#product-img-'+data_img_id).show();
+});
         // update quantity button listener
 $('.update-quantity-form').on('submit', function(){
  
