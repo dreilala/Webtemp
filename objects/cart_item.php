@@ -86,3 +86,27 @@ public function exists(){
  
     return false;
 }
+// count user's items in the cart
+public function count(){
+ 
+    // query to count existing cart item
+    $query = "SELECT count(*) FROM " . $this->table_name . " WHERE user_id=:user_id";
+ 
+    // prepare query statement
+    $stmt = $this->conn->prepare( $query );
+ 
+    // sanitize
+    $this->user_id=htmlspecialchars(strip_tags($this->user_id));
+ 
+    // bind category id variable
+    $stmt->bindParam(":user_id", $this->user_id);
+ 
+    // execute query
+    $stmt->execute();
+ 
+    // get row value
+    $rows = $stmt->fetch(PDO::FETCH_NUM);
+ 
+    // return
+    return $rows[0];
+}
