@@ -13,6 +13,9 @@ class Database{
     public function getConnection(){
 
         $this->conn = null;
+        
+        //$this->conn = new mysqli("localhost", "root", "", "bwi_bb17_chatter");
+        //$result = $dbconn->query("select * from messages order by msgtime desc");
 
         try{
             $this->conn = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->db_name, $this->username, $this->password);
